@@ -39,6 +39,52 @@ Visit **http://localhost:3000** to see the demo!
 
 ---
 
+## ▶️ Run Directly
+
+### Option 1: Run Locally (Fastest)
+```bash
+npm install && npm run dev
+```
+Then open: **[http://localhost:3000](http://localhost:3000)**
+
+### Option 2: Run with Docker
+```bash
+docker build -t ucp-demo . && docker run -p 3000:3000 ucp-demo
+```
+Then open: **[http://localhost:3000](http://localhost:3000)**
+
+### Option 3: Deploy & Run Online (No Local Setup)
+
+#### Vercel (Recommended - 1 Click Deploy)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FNitish1711%2Fucp-demo)
+
+#### Railway (Quick Deploy)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FNitish1711%2Fucp-demo)
+
+### Option 4: Run Test Client
+```bash
+npm install
+npm run client
+```
+Automatically tests the complete checkout flow.
+
+---
+
+## 🎥 Demo Video
+
+Watch the UCP Demo in action:
+
+[![UCP Demo Video](https://img.shields.io/badge/Watch-Demo%20Video-FF0000?style=for-the-badge&logo=youtube)](./Recording%202026-02-18%20101550.mp4)
+
+This video shows:
+- ✅ Starting the server
+- ✅ Accessing the discovery endpoint
+- ✅ Creating a checkout session
+- ✅ Completing a purchase
+- ✅ Full API workflow
+
+---
+
 ## 📡 API Endpoints
 
 ### Discovery Endpoint (Main Entry Point)
