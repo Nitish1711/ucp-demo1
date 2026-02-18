@@ -1,9 +1,9 @@
 {
   "name": "ucp-demo",
   "version": "1.0.0",
-  "description": "AI Gadgets Store - UCP (Universal Commerce Protocol) demo",
+  "description": "Universal Commerce Protocol (UCP) Demo - A working example of UCP merchant implementation",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/server.js",
   "engines": {
     "node": "20"
   },
@@ -11,13 +11,10 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "client": "tsx src/client.ts",
-    "deploy": "npm run build && firebase deploy"
+    "client": "tsx src/client.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.8",
-    "firebase-admin": "^13.6.0",
-    "firebase-functions": "^7.0.3",
     "hono": "^4.6.0",
     "uuid": "^11.0.0"
   },

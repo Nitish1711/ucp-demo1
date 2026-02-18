@@ -20,38 +20,12 @@
 
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { Hono } from "hono";
 import { logger } from "hono/logger";
-import { cors } from "hono/cors";
-import { discoveryRouter } from "./discovery.js";
-import { checkoutRouter } from "./checkout.js";
+import { app } from "./index.js";
 
-const app = new Hono();
-
-// ============================================================================
-// Middleware
-// ============================================================================
-
-// Request logging
+// Add request logging middleware
 app.use("*", logger());
 
-// CORS for browser/agent access
-app.use("*", cors());
-
-// ============================================================================
-// Routes
-// ============================================================================
-
-// UCP Discovery endpoint - THE entry point for any platform
-// Platforms/agents will first hit this to understand what we support
-app.route("/.well-known/ucp", discoveryRouter);
-
-// Shopping API - Checkout operations
-// Base path matches what we advertise in discovery
-app.route("/api/shopping", checkoutRouter);
-
-// Health check
-app.get("/health", (c) => c.json({ status: "ok", protocol: "UCP", version: "2026-01-11" }));
 
 // Static files - Serve the UI from /public directory
 app.use("/styles.css", serveStatic({ path: "./src/public/styles.css" }));

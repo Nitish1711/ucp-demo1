@@ -44,8 +44,8 @@ const productImages = {
   'brain-band': 'https://images.unsplash.com/photo-1589254065878-42c9da997008?w=200&h=200&fit=crop',
 };
 
-const API_BASE = 'https://ucp-demo-api.hemanthhm.workers.dev/api/shopping';
-const DISCOVERY_URL = 'https://ucp-demo-api.hemanthhm.workers.dev/.well-known/ucp';
+const API_BASE = window.location.origin + '/api/shopping';
+const DISCOVERY_URL = window.location.origin + '/.well-known/ucp';
 
 // ============================================================================
 // API with Debug Logging
