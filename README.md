@@ -6,6 +6,48 @@ A production-ready implementation of the [Universal Commerce Protocol (UCP)](htt
 
 ---
 
+## 🌐 Deploy Live Server (Node.js Running)
+
+**⚠️ Important**: GitHub Pages cannot run Node.js servers. You need to deploy to Vercel, Railway, or similar.
+
+### ✨ Option 1: Deploy to Vercel (Recommended - Free & Easiest)
+
+**One-Click Deploy:**
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FNitish1711%2Fucp-demo&project-name=ucp-demo&repo-name=ucp-demo)
+
+**Or Deploy Manually in 3 Steps:**
+
+1. **Install Vercel CLI:**
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Deploy from your project folder:**
+   ```bash
+   cd D:\nitis\Desktop\UCP_Project\ucp-demo1
+   vercel
+   ```
+
+3. **Follow the prompts:**
+   - Press `y` to deploy
+   - Select your team/account
+   - Confirm the project settings
+   - Done! ✅
+
+**You'll get a live URL like:** `https://ucp-demo.vercel.app`
+
+---
+
+### 📊 Alternative Deployment Options
+
+| Platform | Time | Cost | Setup |
+|----------|------|------|-------|
+| **Vercel** | 30 sec | Free | [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FNitish1711%2Fucp-demo) |
+| **Railway** | 1 min | Free | [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FNitish1711%2Fucp-demo) |
+| **Render** | 2 min | Free | [Deploy on Render](https://render.com/deploy?repo=https://github.com/Nitish1711/ucp-demo) |
+
+---
+
 ## 🎯 What is UCP?
 
 Universal Commerce Protocol (UCP) is an open standard that enables seamless commerce interoperability between platforms, AI agents, and businesses. This demo shows how to build a merchant compatible with any UCP-compliant platform.
