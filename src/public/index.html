@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UCP - Universal Commerce Protocol</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <!-- ========================================================================
+       Landing Page
+       ======================================================================== -->
+  <div id="landing" class="landing">
+    <nav class="landing-nav">
+      <div class="landing-logo">&#9670; UCP Demo</div>
+      <div class="landing-nav-links">
+        <a href="https://ucp.dev" target="_blank">Learn about UCP</a>
+        <a href="/.well-known/ucp" target="_blank">Discovery</a>
+        <a href="https://github.com/hemanth/ucp-demo" target="_blank">GitHub</a>
+      </div>
+    </nav>
+
+    <div class="landing-hero">
+      <div class="landing-badge">
+        <span class="landing-badge-dot"></span>
+        UCP Demo
+      </div>
+      <h1 class="landing-title">UCP Demo</h1>
+      <p class="landing-subtitle">
+        This interactive demo shows how the Universal Commerce Protocol works.
+        Browse products, checkout via chat, and toggle Debug Mode to see the actual UCP API calls in real-time.
+      </p>
+      <div class="landing-cta">
+        <button class="btn btn-primary" onclick="showDemo()">Try Demo &rarr;</button>
+        <a href="https://ucp.dev" target="_blank" class="btn btn-secondary">Learn More at UCP.dev</a>
+      </div>
+    </div>
+
+    <div class="landing-features">
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3 class="feature-title">Discovery</h3>
+        <p class="feature-desc">
+          <strong>Implemented:</strong> <code>/.well-known/ucp</code> endpoint returns merchant capabilities, payment
+          handlers, and API endpoints.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3 class="feature-title">Checkout Sessions</h3>
+        <p class="feature-desc">
+          <strong>Implemented:</strong> Full checkout flow with create, update, and complete operations. Real API calls
+          visible in debug mode.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">What's Mocked</h3>
+        <p class="feature-desc">
+          Payment processing uses test tokens. No real charges. In-memory storage resets on each session.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">→</div>
+        <h3 class="feature-title">What's Next</h3>
+        <p class="feature-desc">
+          Real payment gateways, persistent orders, shipping integration. Visit
+          <a href="https://ucp.dev" target="_blank" style="text-decoration: underline;">ucp.dev</a> for the full spec.
+        </p>
+      </div>
+    </div>
+
+    <footer class="landing-footer">
+      <span>&copy; 2025 UCP Demo</span>
+      <span>Built with &lt;3 by <a href="https://h3manth.com" target="_blank">Hemanth HM</a></span>
+      <span><a href="https://ucp.dev" target="_blank">Universal Commerce Protocol</a></span>
+    </footer>
+  </div>
+
+  <!-- ========================================================================
+       Demo App
+       ======================================================================== -->
+  <div id="demo-app" class="demo-app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="logo" onclick="showLanding()">
+          <span class="logo-icon">&#9670;</span> UCP Demo Shop
+        </h1>
+        <div class="header-right">
+          <label class="debug-toggle">
+            <input type="checkbox" id="debug-mode" onchange="toggleDebugMode()">
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">Debug Mode</span>
+          </label>
+          <button class="discovery-btn" onclick="showDiscovery()">
+            View Discovery
+          </button>
+          <button class="back-btn" onclick="showLanding()">
+            Back
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <!-- Chat Panel -->
+      <section class="chat-panel">
+        <div class="chat-header">
+          <div class="assistant-info">
+            <span class="assistant-avatar">UCP</span>
+            <div>
+              <h3>UCP Assistant</h3>
+              <span class="status-online">Online</span>
+            </div>
+          </div>
+          <div class="cart-indicator" id="cart-indicator">
+            <span id="cart-count">0</span> items in cart
+          </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div id="chat-messages" class="chat-messages">
+          <!-- Messages loaded dynamically -->
+        </div>
+
+        <!-- Quick Actions -->
+        <div id="quick-actions" class="quick-actions">
+          <!-- Quick action buttons loaded dynamically -->
+        </div>
+
+        <!-- Chat Input -->
+        <div class="chat-input-container">
+          <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..."
+            onkeypress="handleChatKeypress(event)">
+          <button class="chat-send-btn" onclick="sendMessage()">
+            <span>&#10148;</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Debug Panel (resizable) -->
+    <aside id="debug-panel" class="debug-panel" style="display: none;">
+      <div class="debug-resize-handle" id="debug-resize-handle"></div>
+      <div class="debug-header">
+        <h3>Debug Console</h3>
+        <div class="debug-tabs">
+          <button class="debug-tab active" data-tab="timeline" onclick="switchDebugTab('timeline')">Timeline</button>
+          <button class="debug-tab" data-tab="state" onclick="switchDebugTab('state')">State</button>
+          <button class="debug-tab" data-tab="requests" onclick="switchDebugTab('requests')">Requests</button>
+        </div>
+      </div>
+      <div class="debug-content">
+        <div id="debug-timeline" class="debug-tab-content active">
+          <!-- Timeline entries -->
+        </div>
+        <div id="debug-state" class="debug-tab-content">
+          <pre id="state-json"></pre>
+        </div>
+        <div id="debug-requests" class="debug-tab-content">
+          <div id="requests-log"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Discovery Modal -->
+    <div id="discovery-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>UCP Discovery Profile</h3>
+          <button class="modal-close" onclick="hideDiscovery()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="discovery-url">
+            <strong>Endpoint:</strong> <code>GET /.well-known/ucp</code>
+          </p>
+          <p class="discovery-desc">
+            This is how platforms discover what capabilities this merchant supports.
+          </p>
+          <pre id="discovery-json"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loading" class="loading-overlay" style="display: none;">
+    <div class="spinner"></div>
+    <p id="loading-message">Loading...</p>
+  </div>
+
+  <script src="/app.js?v=4"></script>
+</body>
+
+</html>
